@@ -48,7 +48,7 @@ const Menu = () => {
         </div>
       </div>
       <div ref={menuRef} className={`absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden ${isMenuOpen ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-0'}`}>
-        <div className="rounded-lg bg-gray-800 shadow-md ring-1 ring-black ring-opacity-5 divide-y-2 divide-gray-50">
+        <div className="rounded-lg bg-white shadow-md ring-1 ring-black ring-opacity-5 divide-y-2 divide-gray-50">
         {
             MenuTitles.map((data, index)=>(
                 <Link to={`${data.link}`} key={index} className='block py-2 px-4 text-black'>{data.header}</Link> 
