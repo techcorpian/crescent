@@ -36,7 +36,7 @@ const Menu = () => {
 
             ))
         }
-        <Link to='/portal' className='border border-sky-300 py-1 px-4 rounded-full bg-sky-100'>Teachers Portal</Link>
+        <Link to='/portal' className='border border-sky-300 py-1 px-4 rounded-full bg-sky-100'>Teacher's Portal</Link>
 
         </div>
         <div className="md:hidden">
