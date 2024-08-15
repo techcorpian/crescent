@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { MenuTitles } from '../../../datas/MenuDatas';
+import { Link as ScrollLink } from 'react-scroll';
 import { Link } from 'react-router-dom';
 
 const Menu = () => {
@@ -26,13 +27,22 @@ const Menu = () => {
   return (
     <div className="fixed bg-white md:px-6 z-[10] w-[100%]">
       <div className="flex justify-between items-center py-2 px-6 md:px-0">
-        <div className="flex items-center">
-          <img src="logo.png" alt="Logo" className="h-8" />
+        <div className=" font-extrabold md:text-xl text-lg leading-5 text-center">
+          {/* <img src="logo.png" alt="Logo" className="h-8" /> */}
+          CNPS
         </div>
         <div className="hidden md:flex items-center space-x-4">
         {
             MenuTitles.map((data, index)=>(
-                <Link to={`${data.link}`} key={index} className='text-black px-3'>{data.header}</Link> 
+              <ScrollLink
+              to={data.link}
+              key={index}
+              className='text-black hover:text-[#EEB708] text-base px-3'
+              smooth={true}
+              duration={500}
+          >
+              {data.header}
+          </ScrollLink>
 
             ))
         }
@@ -51,7 +61,12 @@ const Menu = () => {
         <div className="rounded-lg bg-white shadow-md ring-1 ring-black ring-opacity-5 divide-y-2 divide-gray-50">
         {
             MenuTitles.map((data, index)=>(
-                <Link to={`${data.link}`} key={index} className='block py-2 px-4 text-black'>{data.header}</Link> 
+              <ScrollLink 
+              to={data.link} 
+              key={index} 
+              className='block py-2 px-4 text-black hover:bg-gray-100'>
+                  {data.header}
+          </ScrollLink>
             ))
         }
         </div>

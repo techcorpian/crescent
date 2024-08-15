@@ -7,6 +7,9 @@ export const pool = mysql.createConnection({
     password: process.env.DB_PASSWORD,
     host: process.env.DB_HOST,
     database: process.env.DB_DATABASE,
+    waitForConnections: true,
+    connectionLimit: 10,  // Number of concurrent connections
+    queueLimit: 0
   });
 
 pool.connect(error => {
