@@ -58,6 +58,20 @@ export const getUserById = async (req, res) => {
 
 };
 
+  // Get all users by id
+  export const getPasswordById = async (req, res) => {
+    try {
+      const id = req.params.id;
+      const results = await User.getPasswordById(id);
+      res.json(results);
+    } catch (err) {
+      console.error('Error executing query:', err);
+      res.status(500).send('Internal Server Error');
+    }
+  
+  };
+
+
   // Get all usergroups
 export const getUsergroups = async (req, res) => {
   try {
@@ -124,6 +138,76 @@ export const updateUser = async (req, res) => {
     // Handling errors and sending a response with an error message
     res.status(500).send({
       message: err.message || 'Failed to delete file.',
+    });
+  }
+};
+
+export const updatePassword = async (req, res) => {
+  const id = req.params.id;
+  const {username, password} = req.body;
+  const hashedPassword = bcrypt.hashSync(password, 10);
+
+  try {
+    const newPass = new User({ password:hashedPassword });
+    console.log(newPass);
+
+    const logData = {
+      activity: 'Updated the Password For '+username,
+      created_by: id,
+    };
+
+    const data = await User.updatePassword(id, newPass, logData);
+
+    // If no data is returned, the user may not have been found
+    if (data.affectedRows === 0) {
+      return res.status(404).send({
+        message: `File with id ${id} not found.`,
+      });
+    }
+
+    // Sending a success response
+    res.send({
+      message: 'File was Updated successfully!',
+    });
+  } catch (err) {
+    // Handling errors and sending a response with an error message
+    res.status(500).send({
+      message: err.message || 'Failed to Update file.',
+    });
+  }
+};
+
+export const updateForgotPassword = async (req, res) => {
+  const id = req.params.id;
+  const {email, password} = req.body;
+  const hashedPassword = bcrypt.hashSync(password, 10);
+
+  try {
+    const newPass = new User({ password:hashedPassword });
+    console.log(newPass);
+
+    const logData = {
+      activity: 'Updated the Password For '+email,
+      created_by: id,
+    };
+
+    const data = await User.updatePassword(id, newPass, logData);
+
+    // If no data is returned, the user may not have been found
+    if (data.affectedRows === 0) {
+      return res.status(404).send({
+        message: `File with id ${id} not found.`,
+      });
+    }
+
+    // Sending a success response
+    res.send({
+      message: 'File was Updated successfully!',
+    });
+  } catch (err) {
+    // Handling errors and sending a response with an error message
+    res.status(500).send({
+      message: err.message || 'Failed to Update file.',
     });
   }
 };

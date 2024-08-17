@@ -67,7 +67,8 @@ class Student {
 
   static updateStudent(id, newUser, logData) {
     return new Promise((resolve, reject) => {
-      pool.query("UPDATE students SET ? WHERE id = ?", [newUser, id], (err, res) => {
+      const { created_at, updated_at, ...updateData } = newUser;
+      pool.query("UPDATE students SET ? WHERE id = ?", [updateData, id], (err, res) => {
         if (err) {
           console.error('Error deleting file:', err);
           reject(err);

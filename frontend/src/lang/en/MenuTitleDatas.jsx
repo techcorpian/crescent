@@ -29,12 +29,14 @@ export const TopNavlink = [
         "id":1,
         "title":"Dashboard",
         "link":"/portal",
+        "permission":1,
         "icon":<IoMdAnalytics />
     },
     {
         "id":2,
         "title":"Students",
         "link":"/students",
+        "permission":'',
         "icon":<MdOutlineInventory />
     }
     // {

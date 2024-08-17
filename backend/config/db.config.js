@@ -2,7 +2,7 @@ import mysql from 'mysql2'
 import * as dotenv from "dotenv";
 dotenv.config();
 
-export const pool = mysql.createConnection({
+export const pool = mysql.createPool({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     host: process.env.DB_HOST,
@@ -12,9 +12,13 @@ export const pool = mysql.createConnection({
     queueLimit: 0
   });
 
-pool.connect(error => {
-  if (error) throw error;
-  console.log('Successfully connected to the database.');
-});
+  pool.getConnection((error, connection) => {
+    if (error) {
+      console.error('Error connecting to the database:', error);
+      return;
+    }
+    console.log('Successfully connected to the database.');
+    connection.release(); // Release the connection back to the pool
+  });
 
 export default pool;

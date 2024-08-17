@@ -39,7 +39,7 @@ const MainNavigation = props => {
           <BiMenu className="icons"/>
         </button>
         <h1 className="main-navigation__title text-left pl-5">
-          <Link className="text-xl font-bold" to="/">Crescent Teacher Portal</Link>
+          <Link className="text-xl font-bold" to="/">CNPS</Link>
         </h1>
         <nav className="main-navigation__header-nav pl-12">
           <NavLinks />

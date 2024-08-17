@@ -15,7 +15,7 @@ const images = [image1, image2, image3]; // Add more images as needed
     <div id="home" className='pt-6'>
         <Carousel images={images}/>
         <div className=''>
-          <div className='sticky top-[2.8rem] bg-sky-700 text-white py-4 px-4 z-10'>Info Tab</div>
+          <div className='sticky top-[2.8rem] bg-sky-700 text-white py-4 px-4 z-10'>We Promise Quality Education</div>
           <div id="aboutus" className='md:pt-[80px] pt-[50px] md:pb-[100px] pb-[50px] md:pr-[100px] px-[50px]'>
               <About />
           </div>

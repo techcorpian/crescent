@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import AuthService from '../../../../services/auth.service';
 import Table from '../../../shared/UIElements/Tables';
 import { FaSpinner } from 'react-icons/fa'; // Importing a spinner icon
+import { MdOutlinePrivacyTip } from "react-icons/md";
+
 
 const Dashboard = () => {
   const [logList, setLogList] = useState([]);
@@ -10,6 +13,7 @@ const Dashboard = () => {
   const [totalList, setTotalList] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const currentUser = AuthService.getCurrentUser();
 
   const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -55,47 +59,60 @@ const Dashboard = () => {
   );
 
   return (
-    <main>
-      {isLoading ? (
-        <div className="flex justify-center items-center h-screen">
-          <FaSpinner className="animate-spin text-4xl text-sky-700" />
-        </div>
-      ) : (
-        <>
-          <div className='pb-6 pt-3 text-4xl font-bold text-sky-700'>Dashboard</div>
-          <div className='grid md:grid-cols-3 grid-cols-1 gap-4'>
-            <div className='bg-cyan-700 text-black p-6 rounded-xl shadow-lg'>
-              <span className='text-2xl text-white font-bold'>Active Students</span>
-              <div className='text-6xl text-sky-200 font-bold'>
-                {activeList ? activeList.count : '0'}
-              </div>
-            </div>
-            <div className='border p-6 rounded-xl shadow-lg'>
-              <span className='text-2xl text-sky-900 font-bold'>Inactive Students</span>
-              <div className='text-6xl text-sky-700 font-bold'>
-                {inactiveList ? inactiveList.count : '0'}
-              </div>
-            </div>
-            <div className='border p-6 rounded-xl shadow-lg'>
-              <span className='text-2xl text-sky-900 font-bold'>Total Students</span>
-              <div className='text-6xl text-sky-700 font-bold'>
-                {totalList ? totalList.count : '0'}
-              </div>
-            </div>
+    currentUser.usergroup_id == 1 ? (
+      <main>
+
+        {isLoading ? (
+          <div className="flex justify-center items-center h-screen">
+            <FaSpinner className="animate-spin text-4xl text-sky-700" />
           </div>
-          <div className='layout-box mt-6 shadow-lg'>
-            <div className='pb-3 text-2xl font-medium text-sky-700'>Activity Log</div>
-            <Table
-              datas={logList}
-              data={filteredCustomers}
-              columns={columns}
-              setSearchTerm={(e) => setSearchTerm(e.target.value)}
-              searchTerm={searchTerm}
-            />
-          </div>
-        </>
-      )}
-    </main>
+        ) : (
+
+          <>
+
+            <div className='pb-6 pt-3 text-4xl font-bold text-sky-700'>Dashboard</div>
+            <div className='grid md:grid-cols-3 grid-cols-1 gap-4'>
+              <div className='bg-cyan-700 text-black p-6 rounded-xl shadow-lg'>
+                <span className='text-2xl text-white font-bold'>Active Students</span>
+                <div className='text-6xl text-sky-200 font-bold'>
+                  {activeList ? activeList.count : '0'}
+                </div>
+              </div>
+              <div className='border p-6 rounded-xl shadow-lg'>
+                <span className='text-2xl text-sky-900 font-bold'>Inactive Students</span>
+                <div className='text-6xl text-sky-700 font-bold'>
+                  {inactiveList ? inactiveList.count : '0'}
+                </div>
+              </div>
+              <div className='border p-6 rounded-xl shadow-lg'>
+                <span className='text-2xl text-sky-900 font-bold'>Total Students</span>
+                <div className='text-6xl text-sky-700 font-bold'>
+                  {totalList ? totalList.count : '0'}
+                </div>
+              </div>
+            </div>
+            <div className='layout-box mt-6 shadow-lg'>
+              <div className='pb-3 text-2xl font-medium text-sky-700'>Activity Log</div>
+              <Table
+                datas={logList}
+                data={filteredCustomers}
+                columns={columns}
+                setSearchTerm={(e) => setSearchTerm(e.target.value)}
+                searchTerm={searchTerm}
+              />
+            </div>
+          </>
+
+        )}
+
+      </main>
+    ) : <div className='h-screen flex flex-col justify-center items-center gap-3'>
+
+      <MdOutlinePrivacyTip className='text-9xl text-gray-400' />
+      <div className='text-2xl font-thin text-red-400'>Access Denied </div>
+
+    </div>
+
   );
 };
 

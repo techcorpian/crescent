@@ -231,11 +231,11 @@ const Students = () => {
             const response = await axios.get(`${apiUrl}/students/getbyid/${index}`);
             // const formattedDate = new Date(response.data[0].dob).toISOString().split('T')[0];
             console.log(response.data);
-            if(response.data[0].updatestatus == 0){
+            // if(response.data[0].updatestatus == 0){
                 setIsModalOpen(true);
-            }else{
-                toast.warning('Edit Access Denied, Please Contact Your Admin');
-            }
+            // }else{
+                // toast.warning('Edit Access Denied, Please Contact Your Admin');
+            // }
             
             if(currentUser.usergroup_id === '1'){
                 setStudentData({

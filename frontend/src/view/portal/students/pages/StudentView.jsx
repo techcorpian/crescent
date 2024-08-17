@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const StudentView = () => {
     const { id } = useParams();
@@ -32,8 +33,13 @@ const StudentView = () => {
             {view.length > 0 ? (
                 view.map((item) => (
                     <>
-                        <div className='text-3xl font-extrabold text-sky-700 mx-6'>{item.id_name}</div>
-                        <div className='font-thin text-sky-700 mx-6'>{item.enroll_no}</div>
+                        <div className='flex justify-between items-center mx-6'>
+                            <div>
+                            <div className='text-3xl font-extrabold text-sky-700 '>{item.id_name}</div>
+                            <div className='font-thin text-sky-700'>{item.enroll_no}</div>
+                            </div>
+                            <Link to='/students' className='p-2 bg-red-700 text-white px-4 rounded-full text-xs'>Back</Link>
+                        </div>
                         <div className='flex md:flex-row flex-col justify-between gap-6 p-6 '>
 
                             <div className='w-[100%] p-7 rounded-lg shadow-xl bg-white'>
@@ -115,32 +121,32 @@ const StudentView = () => {
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div className='p-7 rounded-lg shadow-xl bg-white h-[100%] mx-6 mb-6'>
-                                    <div className='text-xl pb-2 font-bold border-b'>Academic Details</div>
-                                    <div key={item.id} className='flex justify-between pt-4'>
+                            <div className='text-xl pb-2 font-bold border-b'>Academic Details</div>
+                            <div key={item.id} className='flex justify-between pt-4'>
 
-                                        {/* Labels */}
-                                        <div className='flex flex-col gap-3 font-bold text-sky-700'>
-                                            {
-                                                Labels_4.map((item) =>
-                                                    (<label htmlFor="">{item}</label>))
-                                            }
-                                        </div>
-
-                                        {/* Values */}
-                                        <div className='flex flex-col gap-3 items-end'>
-                                            <span>{item.class_studying}</span>
-                                            <span>{item.section}</span>
-                                            <span>{item.prev_class}</span>
-                                            <span>{item.admission_no}</span>
-                                            <span>{item.doj}</span>
-                                            <span>{item.med_of_instruction}</span>
-                                        </div>
-                                    </div>
+                                {/* Labels */}
+                                <div className='flex flex-col gap-3 font-bold text-sky-700'>
+                                    {
+                                        Labels_4.map((item) =>
+                                            (<label htmlFor="">{item}</label>))
+                                    }
                                 </div>
+
+                                {/* Values */}
+                                <div className='flex flex-col gap-3 items-end'>
+                                    <span>{item.class_studying}</span>
+                                    <span>{item.section}</span>
+                                    <span>{item.prev_class}</span>
+                                    <span>{item.admission_no}</span>
+                                    <span>{item.doj}</span>
+                                    <span>{item.med_of_instruction}</span>
+                                </div>
+                            </div>
+                        </div>
                     </>
                 ))
             ) : (

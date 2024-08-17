@@ -25,12 +25,12 @@ const Menu = () => {
       };
     }, [menuRef]);
   return (
-    <div className="fixed bg-white md:px-6 z-[10] w-[100%]">
+    <div className="fixed bg-white md:px-6 z-[12] w-[100%]">
       <div className="flex justify-between items-center py-2 px-6 md:px-0">
-        <div className=" font-extrabold md:text-xl text-lg leading-5 text-center">
+        <Link to='/' className=" font-extrabold md:text-xl text-lg leading-5 text-center">
           {/* <img src="logo.png" alt="Logo" className="h-8" /> */}
           CNPS
-        </div>
+        </Link>
         <div className="hidden md:flex items-center space-x-4">
         {
             MenuTitles.map((data, index)=>(

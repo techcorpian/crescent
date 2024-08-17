@@ -22,8 +22,15 @@ const Login = () => {
 
     AuthService.login(username, password).then(
       () => {
-        navigate('/portal');
+        // if(currentUser.usergroup_id == 1){
+        navigate('/students');
         window.location.reload();
+        // }else{
+        //   navigate('/students');
+        //   window.location.reload();
+        // }
+
+       
       },
       (error) => {
         const resMessage =
@@ -70,6 +77,9 @@ const Login = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
+                <div className='text-right'>
+                <Link to='/portal/forgot-password' className='text-blue-700 underline cursor-pointer'>Forgot Password</Link>
+                </div>
               </div>
 
               {message && (
